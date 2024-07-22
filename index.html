@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="A tool to help with keeping track of drinking buddies">
+    <meta name="keywords" content="drinking games, game tool, buddy rules, party games, drinking rules, social games, fun drinking activities, party ideas, drinking buddy, game rules, drinking challenges, drinking buddies, group drinking games, party fun, rule tracking, alcohol games, drinking party, drink with friends, drink responsibly, game night, interactive drinking games">
+    <meta name="author" content="Vivian Kirkaune">
+    <title>Drinking Buddies Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <div class="panel">
+		<h1>Player List</h1>
+        <ul id="sortable">
+            <li draggable="true" onclick="removePlayer(this)">Item 1</li>
+            <li draggable="true" onclick="removePlayer(this)">Item 2</li>
+            <li draggable="true" onclick="removePlayer(this)">Item 3</li>
+            <!-- Add more list items as needed -->
+        </ul>
+		<div>
+			<input type="text" name="Add player" id="addPlayer">
+			<button type="submit" onclick="addPlayer()">Add</button>
+		</div>
+    </div>
+	<div id="nameBox">
+		<div class="nameCard">Bob</div>
+		<div class="nameCard">Bob</div>
+	</div>
+	<div class="panel">
+		<h1>Rules</h1>
+		<ul id="rule-list">
+		</ul>
+	</div>
+	<script src="dragable.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>

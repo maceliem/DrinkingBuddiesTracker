@@ -1,0 +1,57 @@
+/* style.css */
+body {
+	font-family: Arial, sans-serif;
+	display: flex;
+	background-color: rgb(173, 173, 173);
+	justify-content: space-between;
+	margin: 0;
+	text-align: center;
+}
+
+body>div {
+	height: 100vh;
+}
+.panel {
+	background-color: rgb(190, 225, 255);
+	padding: 0 20px;
+	width: 20vw;
+}
+.panel:first-of-type {
+	border-right: 3px solid rgba(0, 0, 0, 0.5);
+}
+
+.panel:last-of-type {
+	border-left: 3px solid rgba(0, 0, 0, 0.5);
+}
+
+#nameBox {
+	width: 50vw;
+	height: 50vw;
+	position: absolute;
+	top: calc(50% - 25vw);
+	left: 25vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.nameCard {
+	position: absolute;
+	transform-origin: center;
+	padding: 18px;
+	background-color: rgb(244, 243, 230);
+	border: 1px solid black;
+	border-radius: 10px;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	background-color: #f0f0f0;
+	padding: 10px;
+	margin: 5px;
+	cursor: grab;
+}
