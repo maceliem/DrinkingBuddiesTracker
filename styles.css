@@ -24,6 +24,37 @@ body>div {
 	border-left: 3px solid rgba(0, 0, 0, 0.5);
 }
 
+#sortable {
+    height: 50%; 
+    overflow-y: auto; 
+    border: 1px solid #ccc; 
+}
+
+#sortable::-webkit-scrollbar {
+    width: 20px; /* Adjust the width of the vertical scrollbar */
+}
+
+#sortable::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the thumb */
+    border-radius: 10px; /* Roundness of the scrollbar thumb */
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	background-color: #f0f0f0;
+	padding: 10px;
+	margin: 5px;
+	cursor: grab;
+}
+
+input[type="text"] {
+	width: 10vw;
+}
+
 #nameBox {
 	width: 50vw;
 	height: 50vw;
@@ -42,16 +73,4 @@ body>div {
 	background-color: rgb(244, 243, 230);
 	border: 1px solid black;
 	border-radius: 10px;
-}
-
-ul {
-	list-style-type: none;
-	padding: 0;
-}
-
-li {
-	background-color: #f0f0f0;
-	padding: 10px;
-	margin: 5px;
-	cursor: grab;
 }
