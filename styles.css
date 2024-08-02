@@ -57,13 +57,15 @@ input[type="text"] {
 
 #nameBox {
 	width: 50vw;
-	height: 50vw;
+	height: 48vw;
 	position: absolute;
 	top: calc(50% - 25vw);
 	left: 25vw;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	touch-action: manipulation;
+    pointer-events: auto;
 }
 
 .nameCard {
@@ -73,4 +75,20 @@ input[type="text"] {
 	background-color: rgb(244, 243, 230);
 	border: 1px solid black;
 	border-radius: 10px;
+	pointer-events: auto;
+}
+
+#recursive {
+	width: 20px;
+}
+
+.box {
+	display: flex;
+	align-items: center;
+}
+
+input[type="number"],#ruleType {
+	width: 40%;
+	font-size: 15px;
+	padding: 5px;
 }

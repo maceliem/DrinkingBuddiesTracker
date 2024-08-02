@@ -1,6 +1,17 @@
+let rules = [
+]
+let recursive = 0
+
+playerNameInput = document.getElementById("addPlayer")
+playerNameInput.addEventListener('keydown', function(event) {
+	if (event.key === 'Enter') {
+		event.preventDefault();  // Prevent form submission or other default behavior
+		addPlayer()
+	}
+})
 function addPlayer(){
-	playerName = document.getElementById("addPlayer").value
-	document.getElementById("addPlayer").value = ""
+	playerName = playerNameInput.value
+	playerNameInput.value = ""
 	if (playerName == "") return console.log("Name too short")
 	li = document.createElement("li")
 	li.draggable = "true"
@@ -10,10 +21,7 @@ function addPlayer(){
 	}
 	document.getElementById("sortable").appendChild(li)
 	
-	div = document.createElement("div")
-	div.classList.add("nameCard")
-	div.innerHTML = playerName
-	document.getElementById("nameBox").appendChild(div)
+	addNameCard(playerName)
 	updateCards()
 }
 
@@ -45,5 +53,90 @@ function updateCards(){
 		element.style.top = `${y}px`;
 	});
 }
+function addNameCard(name){
+	div = document.createElement("div")
+	div.classList.add("nameCard")
+	div.innerHTML = name
+	div.addEventListener("mouseover", function() {
+		targetOn(this)
+	})
+	div.addEventListener("touchstart", function(){
+		targetOn(this)
+	})
+	div.addEventListener("mouseout", function() {
+		targetOff()
+	})
+	div.addEventListener("touchend", function() {
+		targetOff()
+	})
+	document.getElementById("nameBox").appendChild(div)
+}
 
-updateCards()
+function targetOn(card, n = recursive + 1) {
+	card.style.backgroundColor = "Red"
+	if (n == 0) return
+	for (const rule of rules){
+		if (rule.type == "turn"){
+			const cards = document.getElementsByClassName("nameCard")
+			for (let i in cards){
+				i = parseInt(i)
+				if (cards[i] == card){
+					targetOn(cards[(cards.length + i + rule.val) % cards.length], n-1)
+				}
+			}
+		}
+	}
+}
+
+function targetOff() {
+	for (const card of document.getElementsByClassName("nameCard")) {
+		card.style.backgroundColor = "rgb(244, 243, 230)"
+	}
+}
+
+const recursiveBox = document.getElementById("recursive")
+
+recursiveBox.addEventListener("input", function(e){
+	recursive = parseInt(e.target.value)
+})
+
+function addNewRule(){
+	type = document.getElementById("ruleType").value
+	val = document.getElementById("ruleVal").value
+	const li = document.createElement("li")
+	li.innerHTML = type + " - " + val
+	li.addEventListener("click", removeRule)
+	document.getElementById("rule-list").appendChild(li)
+	if (type == "Left") {
+		type = "turn"
+		val = parseInt(val)
+	}else if (type == "Right"){
+		type = "turn"
+		val *= -1
+	}
+	rules.push({
+		"type": type,
+		"val": val,
+	})
+
+	document.getElementById("ruleType").value = ""
+	document.getElementById("ruleVal").value = 1
+}
+
+function removeRule(e){
+	if (confirm("Wanna remove the rule?")){
+		const li = e.target
+		const str = li.innerHTML.split(" - ")
+		let type = str[0]
+		let val = str[1]
+		if (type == "Left"){
+			type = "turn"
+		}else if (type == "Right"){
+			type = "turn"
+			val *= -1
+		}
+		const rule = rules.find(item => item.type == type && item.val == val)
+		rules = rules.filter(item => item != rule)
+		document.getElementById("rule-list").removeChild(li)
+	}
+}

@@ -37,10 +37,7 @@ function handleDragEnd(e) {
 		const nameBox = document.getElementById("nameBox");
 		nameBox.innerHTML = "";
 		for (let player of playerlist) {
-			let div = document.createElement("div");
-			div.classList.add("nameCard");
-			div.innerHTML = player.innerHTML;
-			nameBox.appendChild(div);
+			addNameCard(player.innerHTML)
 		}
 		updateCards();
 	}, 0);
@@ -59,11 +56,15 @@ function handleDragOver(e) {
 }
 
 function handleTouchStart(e) {
-	e.preventDefault();
 	const touch = e.touches[0];
-	draggedItem = touch.target;
-	draggedItem.classList.add('dragging');
-	startLongPress(e); // Start long press detection
+	if (touch.target.draggable){
+		draggedItem = touch.target;
+		draggedItem.classList.add('dragging');
+		startLongPress(e); // Start long press detection
+	}
+	else if (touch.target.classList.contains("nameCard")){
+		targetOn(touch.target)
+	}
 }
 
 function handleTouchMove(e) {
@@ -81,6 +82,7 @@ function handleTouchMove(e) {
 }
 
 function handleTouchEnd(e) {
+	if (draggedItem) {
 	e.preventDefault();
 	cancelLongPress(); // Cancel long press detection
 	setTimeout(() => {
@@ -100,15 +102,18 @@ function handleTouchEnd(e) {
 		}
 	}, 0);
 }
+	targetOff()
+
+}
 
 sortableList.addEventListener("dragstart", handleDragStart);
 sortableList.addEventListener("dragend", handleDragEnd);
 sortableList.addEventListener("dragover", handleDragOver);
 
 // Add touch event listeners
-sortableList.addEventListener("touchstart", handleTouchStart);
+document.addEventListener("touchstart", handleTouchStart);
 sortableList.addEventListener("touchmove", handleTouchMove);
-sortableList.addEventListener("touchend", handleTouchEnd);
+document.addEventListener("touchend", handleTouchEnd);
 
 const getDragAfterElement = (container, y) => {
 	const draggableElements = [...container.querySelectorAll("li:not(.dragging)")];
