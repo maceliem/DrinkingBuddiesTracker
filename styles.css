@@ -79,12 +79,13 @@ input[type="text"] {
 }
 
 #recursive {
-	width: 20px;
+	width: 25px;
 }
 
 .box {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 }
 
 input[type="number"],#ruleType {
